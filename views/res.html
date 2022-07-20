@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <h1>注册</h1>
+        <form  id="formId">
+            <div class="use-box">
+                <input class="zhanghao" type="text" required="" name="name">
+                <label for="">昵称</label>
+            </div>
+            <div class="use-box">
+                <input class="zhanghao" type="e-mail" required="" name="email">
+                <label for="">e-mail</label>
+            </div>
+            <div class="use-box">
+                <input class="mima" type="password" required="" name="password">
+                <label for="">密码</label>
+            </div>
+            <a onclick="$('#formId').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                注册
+            </a>
+            <a href="/login/">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                已有账号，去登录
+            </a>
+        </form>
+    </div>
+</body>
+<script>
+    $('#formId').on('submit', function(e) {
+        e.preventDefault();
+        var formData=$(this).serialize();
+        $.ajax({
+            url: '/res',
+            type: 'post',
+            data: formData,
+            datatype: 'json',
+            success: function(data) {
+                var code=data.err_code;
+                if(code===0){
+                    // window.alert('注册成功')
+                    window.location.href='/'
+
+                }else if(code===1){
+                    window.alert('昵称或e-mali重复')
+                    window.location.href = '/res'
+                }else if(code===500){
+                    window.alert('服务端错误')
+                }
+            }
+        })
+    })
+</script>
+
+</html>

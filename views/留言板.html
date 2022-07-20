@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/3.css">
+</head>
+
+<body>
+    <div class="cont">
+        <h1>留言板</h1>
+        <div class="t-r">
+            {{if user}}
+            <a href="javascript:void(0)" class="xx"></a>
+            <div class="xbxi">
+                <span>用户名:   {{user.name}}</span>
+                <span>个人信息</span>
+                <a href="/out">退出</a>
+            </div>
+            {{else}}
+            <a href="/login/" >登录</a>
+            <a href="/res/" >注册</a>
+            {{/if}}
+        </div>
+
+    </div>
+    <form action="/pinglun" method="post" id="pinglun">
+        <label for="name" class="l1">
+            请输入你的名字
+        </label>
+        <input type="text" id="name" name="name" required>
+        <label for="hello" class="l2">
+            请输入你的评论
+        </label>
+        <textarea id="hello" name="hello" required></textarea>
+        <br>
+        <a onclick="document:pinglun.submit()" id="go">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            提交
+        </a>
+    </form>
+    <div class="cont">
+        {{each comments}}
+        <p>{{$value.name}}说：{{$value.hello}}<span id="riqi">{{$value.riqi}}</span>
+        </p>
+        {{/each}}
+    </div>
+</body>
+
+</html>
